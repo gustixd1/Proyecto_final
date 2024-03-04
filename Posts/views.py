@@ -26,6 +26,7 @@ class CreacionPublicaciones(CreateView):
     model = Publicaciones
     success_url = "Nuevo"
     fields = ["titulo", "bajada", "fecha", "cuerpo"]
+    template_name = "Posts/post-formulario"
 
 class EliminarPublicacion(DeleteView):
     model = Publicaciones
