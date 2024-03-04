@@ -1,0 +1,32 @@
+{% extends "Home/padre.html" %}
+{% load static %}
+{% block division %}
+<title>Registrarse - GatoBlog</title>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('https://cdn.pixabay.com/photo/2023/05/04/23/08/cat-7971239_960_720.jpg')"> 
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="page-heading">
+                            <h1>Registrar</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <main class="mb-4" >
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7" >
+                        <form action=""    method="POST">
+                            {% csrf_token %}
+                            {{ form.as_p}}
+                            <button type="submit">Registrar</button></a>
+                        </form> 
+                    </div>
+                </div>
+            </div>
+        </main>
+
+{% endblock division%}

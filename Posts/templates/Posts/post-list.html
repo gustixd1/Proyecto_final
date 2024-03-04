@@ -1,0 +1,28 @@
+{% extends "Home/padre.html" %}
+{% load static %}
+{% block division %}
+
+    {% for publicacion in objects %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <!-- Blog post-->
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="small text-muted">{{publicacion.fecha}}</div>
+                        <h2 class="card-title h4">{{publicacion.titulo}}</h2>
+                        <p class="card-text">{{publicacion.bajada}}</p>
+                        <p>
+                            <a class="btn btn-primary" href="{% url 'Detalles' publicacion.id %}">Leer</a>
+                            {% if request.user.is_superuser %}
+                                <a class="btn btn-primary" href="{% url 'Eliminar' publicacion.id %}">Eliminar</a>
+                            {% endif %}
+                            </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+{% endblock %}

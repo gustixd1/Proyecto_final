@@ -1,0 +1,13 @@
+{% extends "Home/padre.html" %}
+{% load static %}
+{% block division %}
+
+    <form method="post">
+        {% csrf_token %}
+        <table>
+            {{ formulario.as_p}}
+        </table>
+        <input type="submit" value="Subir publicación" />
+    </form>
+
+{% endblock %}

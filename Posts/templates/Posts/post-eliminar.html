@@ -1,0 +1,11 @@
+{% extends "Home/padre.html" %}
+{% load static %}
+{% block division %}
+
+    <form method="post">
+        {% csrf_token %}
+        ¿Estás seguro(a) que deseas eliminar la publicación: "{{ object.titulo }}"?
+        <input type="submit" value="Eliminar" />
+    </form>
+
+{% endblock%}
