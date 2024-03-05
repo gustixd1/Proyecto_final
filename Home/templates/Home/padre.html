@@ -24,9 +24,10 @@
                     <div class = "dropdown">
                         <button class="btn btn-outline-light dropdown toggle" type="button" id="dropdownMenuBotton1" data-bs-toggle="dropdown" aria-expanded="false">
                             {{ request.user.username }}
+                            <img src="{{ user_avatar }}" alt="Avatar" style="height: 50px; width: 50px;">
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="{% url 'Editar perfil' %}">Editar</a></li>
+                            <li><a class="dropdown-item text-center" href="{% url 'Editar perfil' %}">Editar</a></li>
                             <li><a class="dropdown-item">
                                 <form method="post" action="{% url 'Logout' %}">
                                 {% csrf_token %}

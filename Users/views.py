@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from Users.forms import UserRegisterForm, UserEditForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
@@ -14,8 +14,11 @@ def register(request):
         if form.is_valid():
             
             username = form.cleaned_data["username"]
-            form.save()
-            return render(request, "Users/login.html", {"mensaje":"Usuario creado exitosamente"})
+            user = form.save()
+            redireccion = request.GET.get("next", "/")
+            login(request, user)
+            return redirect(redireccion)
+            # return render(request, "Users/login.html", {"mensaje":"Usuario creado exitosamente"})
     
     else:
         
@@ -37,7 +40,9 @@ def login_request(request):
             if user is not None:
                 login(request, user)
                 
-                return render(request, "Home/index.html", {"mensaje" : f"Bienvenido {usuario}"})
+                redireccion = request.GET.get("next", "/")
+                return redirect(redireccion)
+                # return render(request, "Home/index.html", {"mensaje" : f"Bienvenido {usuario}"})
             else:
                 form = AuthenticationForm()
                 return render(request, "Users/login.html", {"mensaje" : "Error, datos incorrectos", "form":form})

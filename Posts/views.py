@@ -14,21 +14,22 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 class ListaPublicaciones(ListView):
     model = Publicaciones
-    template_name = "Posts/post_list.html"
+    template_name = "Posts/post-lista.html"
     context_object_name = "objects"
 
 class DetallePublicaciones(DetailView):
     model = Publicaciones
-    template_name = "Posts/post_detalle.html"
+    template_name = "Posts/post-detalle.html"
     context_object_name = "objects"
 
-class CreacionPublicaciones(CreateView):
+class CreacionPublicaciones(LoginRequiredMixin, CreateView):
     model = Publicaciones
-    success_url = "Nuevo"
+    template_name = "Posts/post-formulario.html"
+    success_url = reverse_lazy("Nuevo")
     fields = ["titulo", "bajada", "fecha", "cuerpo"]
-    template_name = "Posts/post-formulario"
+    
 
 class EliminarPublicacion(DeleteView):
     model = Publicaciones
-    success_url = "Publicaciones"
     template_name = "Posts/post-eliminar.html"
+    success_url = reverse_lazy("Publicaciones")

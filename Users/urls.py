@@ -7,3 +7,5 @@ urlpatterns = [
     path("logout/", LogoutView.as_view(template_name="Home/index.html"), name = "Logout"),
     path("editar_perfil", edit_user, name="Editar perfil")
 ]
+
+urlpatterns += []

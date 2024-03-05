@@ -1,7 +1,19 @@
 {% extends "Home/padre.html" %}
 {% load static %}
 {% block division %}
-
+<title>Publicaciones - GatoBlog</title>
+    <!-- Page Header-->
+    <header class="masthead" style="background-image: url('https://cdn.pixabay.com/photo/2023/05/04/23/08/cat-7971239_960_720.jpg')"> 
+        <div class="container position-relative px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <div class="page-heading">
+                        <h1>Publicaciones</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
     {% for publicacion in objects %}
     <div class="container">
         <div class="row">
@@ -13,7 +25,7 @@
                         <h2 class="card-title h4">{{publicacion.titulo}}</h2>
                         <p class="card-text">{{publicacion.bajada}}</p>
                         <p>
-                            <a class="btn btn-primary" href="{% url 'Detalles' publicacion.id %}">Leer</a>
+                            <a class="btn btn-primary" href="{% url 'Detalles' publicacion.id %}">Leer más</a>
                             {% if request.user.is_superuser %}
                                 <a class="btn btn-primary" href="{% url 'Eliminar' publicacion.id %}">Eliminar</a>
                             {% endif %}
@@ -24,5 +36,8 @@
         </div>
     </div>
     {% endfor %}
-
+    <div class="d-flex justify-content-center">
+        <a class="btn btn-primary btn-xl rounded-pill mt-5" href="{% url 'Nuevo' %}">Agregar</a>
+    </div>
+    <br>
 {% endblock %}
