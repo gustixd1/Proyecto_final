@@ -15,9 +15,6 @@ class FormularioPublicacion(forms.Form):
         widgets = {
             'fecha': forms.DateInput(attrs={'placeholder': 'DD/MM/YYYY', 'pattern': '\d{2}/\d{2}/\d{4}'}),
         }
+        help_text = {k:"" for k in fields}
 
-    help_text = "Por favor, ingrese la fecha en el formato DD/MM/YYYY."
-
-    def __init__(self, *args, **kwargs):
-        super(FormularioPublicacion, self).__init__(*args, **kwargs)
-        self.fields['fecha'].help_text = self.help_text
+    

@@ -51,11 +51,12 @@
                             {% csrf_token %}
                             {{ form.as_p}}
                             
-                            <button class ="btn btn-outline-dark dropdown toggle" type="submit">Iniciar Sesión</button>
+                            <button class ="btn btn-outline-dark dropdown toggle" type="submit">Iniciar Sesión </button>
                         </form>
+                        <p style="color: red;">{{mensaje}}</p>
                         <p>¿No tienes una cuenta? <a href="{% url 'Registro' %}"><button class ="btn btn-outline-dark dropdown toggle" type="button">Crear cuenta</button></a></p>
                     </div>
-                    <p style="color: red;">{{mensaje}}</p>
+                    
                 </div>
             </div>
         </main>

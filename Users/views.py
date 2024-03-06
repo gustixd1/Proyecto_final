@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
-from Users.forms import UserRegisterForm, UserEditForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from Users.forms import UserRegisterForm, UserEditForm
+from Users.models import Avatar
 
 # Create your views here.
 def register(request):
@@ -13,7 +14,6 @@ def register(request):
         
         if form.is_valid():
             
-            username = form.cleaned_data["username"]
             user = form.save()
             redireccion = request.GET.get("next", "/")
             login(request, user)
@@ -42,17 +42,14 @@ def login_request(request):
                 
                 redireccion = request.GET.get("next", "/")
                 return redirect(redireccion)
-                # return render(request, "Home/index.html", {"mensaje" : f"Bienvenido {usuario}"})
-            else:
-                form = AuthenticationForm()
-                return render(request, "Users/login.html", {"mensaje" : "Error, datos incorrectos", "form":form})
         
         else:
             form = AuthenticationForm()
-            return render(request, "Users/login.html", {"mensaje" : "Error, formulario erróneo", "form":form})
+            return render(request, "Users/login.html", {"mensaje" : "Datos incorrectos", "form":form})
     else:
         form = AuthenticationForm()
         return render(request, "Users/login.html", {"form":form})
+
 
 @login_required
 def edit_user(request):
@@ -61,25 +58,43 @@ def edit_user(request):
 
     if request.method == 'POST':
 
-        form = UserEditForm(request.POST)
+        form = UserEditForm(request.POST, request.FILES)
 
         if form.is_valid():
 
             informacion = form.cleaned_data
 
-            usuario.email = informacion['email']
-            usuario.password1 = informacion['password1']
-            usuario.password2 = informacion['password2']
-            usuario.last_name = informacion['last_name']
-            usuario.first_name = informacion['first_name']
+            if informacion["password1"] != informacion["password2"]:
+                datos = {
+                    'first_name': usuario.first_name,
+                    'email': usuario.email
+                }
+                form = UserEditForm(initial=datos)
 
-            usuario.save()
+            else:
+                usuario.email = informacion['email']
+                if informacion["password1"]:
+                    usuario.set_password(informacion["password1"])
+                usuario.last_name = informacion['last_name']
+                usuario.first_name = informacion['first_name']
+                usuario.save()
 
-            return render(request, "Home/index.html")
+                try:
+                    avatar = Avatar.objects.get(user=usuario)
+                except Avatar.DoesNotExist:
+                    avatar = Avatar(user=usuario, imagen=informacion["imagen"])
+                    avatar.save()
+                else:
+                    avatar.imagen = informacion["imagen"]
+                    avatar.save()
+
+                return redirect(request.GET.get("next", "/"))
 
     else:
+        datos = {
+            'first_name': usuario.first_name,
+            'email': usuario.email
+        }
+        form = UserEditForm(initial=datos)
 
-        form = UserEditForm(initial={'email': usuario.email})
-
-    return render(request, "Users/edit_user.html", {"form": form, "usuario": usuario})
-
+    return render(request, "Users/editar-usuario.html", {"form": form, "usuario": usuario})

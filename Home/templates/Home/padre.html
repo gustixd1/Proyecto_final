@@ -20,30 +20,6 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light" id="mainNav">
             <div class="container px-4 px-lg-5">
-                {% if request.user.is_authenticated %}
-                    <div class = "dropdown">
-                        <button class="btn btn-outline-light dropdown toggle" type="button" id="dropdownMenuBotton1" data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ request.user.username }}
-                            <img src="{{ user_avatar }}" alt="Avatar" style="height: 50px; width: 50px;">
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item text-center" href="{% url 'Editar perfil' %}">Editar</a></li>
-                            <li><a class="dropdown-item">
-                                <form method="post" action="{% url 'Logout' %}">
-                                {% csrf_token %}
-                                <button class="dropdown-item" type="submit">Cerrar Sesión</button>
-                            </form></a>
-                            </li>
-                        </ul>
-                    </div>
-                {% else %}
-                    <li class="nav-item"><a class="btn btn-outline-light dropdown toggle" href="{% url 'Login' %}">Iniciar Sesión</a></li>
-                    <li class="nav-item"><a class="btn btn-outline-light dropdown toggle" href="{% url 'Registro' %}">Registrarse</a></li>
-                {% endif %}
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    Menu
-                    <i class="fas fa-bars"></i>
-                </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto py-4 py-lg-0">
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'Inicio' %}">Inicio</a></li>
@@ -51,6 +27,36 @@
                         <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="{% url 'Publicaciones' %}">Publicaciones</a></li>
                     </ul>
                 </div>
+                {% if request.user.is_authenticated %}
+                <div class = "dropdown">
+                    <button class="btn btn-outline-light dropdown toggle" type="button" id="dropdownMenuBotton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        {% if user_avatar %}
+                            {{ request.user.username }} <img src="{{ user_avatar }}" alt="" style="height: 40px; width: 40px;">
+                        {% else %}
+                            {{ request.user.username }}
+                        {% endif %}
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item text-center" href="{% url 'Editar perfil' %}">Editar</a></li>
+                        <li><a class="dropdown-item">
+                            <form method="post" action="{% url 'Logout' %}">
+                            {% csrf_token %}
+                            <button class="dropdown-item" type="submit">Cerrar Sesión</button>
+                        </form></a>
+                        </li>
+                    </ul>
+                </div>
+                {% else %}
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Cuenta
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li ><a class="dropdown-item text-center" href="{% url 'Login' %}">Iniciar Sesión</a></li>
+                            <li ><a class="dropdown-item text-center" href="{% url 'Registro' %}">Registrarse</a></li>
+                        </ul>
+                    </div>
+                {% endif %}
             </div>
         </nav>
         {% block division %}
