@@ -28,6 +28,7 @@
                                 <div class="small text-muted">{{publicacion.fecha}}</div>
                                 <h2 class="card-title h4">{{publicacion.titulo}}</h2>
                                 <p class="card-text">{{publicacion.bajada}}</p>
+                                <p class="small text-muted">por {{publicacion.autor}}</p>
                                 <p>
                                     <a class="btn btn-primary" href="{% url 'Detalles' publicacion.id %}">Leer más</a>
                                     {% if request.user.is_superuser %}

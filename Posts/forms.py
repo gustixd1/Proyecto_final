@@ -4,6 +4,7 @@ from Posts.models import Publicaciones
 class FormularioPublicacion(forms.Form):
     titulo = forms.CharField(max_length=50)
     bajada = forms.CharField(max_length=300)
+    autor = forms.CharField(max_length=50)
     fecha = forms.DateField(max_length=30)
     cuerpo = forms.CharField(max_length=3000)
     imagen = forms.ImageField()

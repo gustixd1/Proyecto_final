@@ -26,7 +26,7 @@ class CreacionPublicaciones(LoginRequiredMixin, CreateView):
     model = Publicaciones
     template_name = "Posts/post-formulario.html"
     success_url = reverse_lazy("Publicaciones")
-    fields = ["titulo", "bajada", "fecha", "cuerpo", "imagen"]
+    fields = ["titulo", "bajada", "autor", "fecha", "cuerpo", "imagen"]
     
 
 class EliminarPublicacion(DeleteView):

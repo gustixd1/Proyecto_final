@@ -18,8 +18,7 @@ def register(request):
             redireccion = request.GET.get("next", "/")
             login(request, user)
             return redirect(redireccion)
-            # return render(request, "Users/login.html", {"mensaje":"Usuario creado exitosamente"})
-    
+        
     else:
         
         form = UserRegisterForm()

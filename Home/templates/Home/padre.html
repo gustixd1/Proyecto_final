@@ -31,7 +31,7 @@
                 <div class = "dropdown">
                     <button class="btn btn-outline-light dropdown toggle" type="button" id="dropdownMenuBotton1" data-bs-toggle="dropdown" aria-expanded="false">
                         {% if user_avatar %}
-                            {{ request.user.username }} <img src="{{ user_avatar }}" alt="" style="height: 40px; width: 40px;">
+                            {{ request.user.username }} <img src="{{ user_avatar }}" alt="..." style="height: 40px; width: 40px;">
                         {% else %}
                             {{ request.user.username }}
                         {% endif %}
