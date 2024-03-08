@@ -1,5 +1,5 @@
-<h2>GatoBlog - Proyecto Final</h2>
-<h1>Gustavo Saavedra Villalobos</h1>
+<h1>GatoBlog - Proyecto Final</h1>
+<h2>Gustavo Saavedra Villalobos</h2>
 
 Esta entrega consiste en un blog de Gatos, este puede contener noticias, tips, historias. El proyecto consta de 3 apps:
 
